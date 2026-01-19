@@ -15,23 +15,32 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Changed to min-height for scrolling content */
-            background-color: #ffe6e6;
+            min-height: 100vh;
             font-family: 'Arial', sans-serif;
             text-align: center;
-            /* overflow: hidden;  <-- Removed this so we can scroll the roadmap if needed */
+
+            /* --- BACKGROUND IMAGE STYLES --- */
+            /* Replace 'background.jpg' with the filename you uploaded to GitHub */
+            background-image: url('background.jpg');
+            background-size: cover; /* Ensures it fills the whole screen */
+            background-position: center; /* Centers the focus */
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Keeps background still while scrolling on mobile */
+            background-color: #ffe6e6; /* Fallback color just in case */
         }
 
+        /* Added a slight transparency to the white box so the background shows through a bit */
         .container {
-            background: white;
+            background: rgba(255, 255, 255, 0.95); 
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             max-width: 90%;
             width: 500px;
-            margin: 20px; /* Adds space on mobile */
+            margin: 20px;
             position: relative;
             transition: height 0.3s ease;
+            backdrop-filter: blur(5px); /* Optional: Adds a nice blur effect behind the box */
         }
 
         h1 {
@@ -88,8 +97,8 @@
 
         /* --- SUCCESS & ROADMAP STYLES --- */
         .success-message {
-            display: none; /* Hidden by default */
-            text-align: left; /* Better for reading the timeline */
+            display: none;
+            text-align: left;
         }
 
         .chibi-img {
@@ -111,7 +120,7 @@
             margin-bottom: 25px;
             padding-left: 20px;
             position: relative;
-            opacity: 0; /* Hidden for animation */
+            opacity: 0;
             transform: translateY(10px);
             transition: all 0.5s ease;
         }
@@ -119,7 +128,7 @@
         .timeline-item::before {
             content: '❤️';
             position: absolute;
-            left: -14px; /* Centers the heart on the line */
+            left: -14px;
             background: white;
             top: 0;
             font-size: 1.2rem;
@@ -203,7 +212,7 @@
                     <div class="details">Sweet treats to end the night!</div>
                 </div>
             </div>
-            <h1 style="text-align: center;">All you have to do is look pretty, leave everything to me.</h1>
+            <h1 style="text-align: center; margin-top: 30px;">All you have to do is look pretty, leave everything to me.</h1>
         </div>
     </div>
 
@@ -219,15 +228,10 @@
         }
 
         function acceptDate() {
-            // Hide Question
             document.getElementById('question-box').style.display = 'none';
-            
-            // Show Success
             const successBox = document.getElementById('success-box');
             successBox.style.display = 'block';
 
-            // Trigger animations for timeline items
-            // We use a small timeout to let the display:block render first
             setTimeout(() => {
                 const items = document.querySelectorAll('.timeline-item');
                 items.forEach(item => {
@@ -240,8 +244,3 @@
 
 </body>
 </html>
-
-
-
-
-
