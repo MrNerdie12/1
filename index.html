@@ -12,10 +12,10 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #ffe6e6; /* Soft pink background */
+            background-color: #ffe6e6;
             font-family: 'Arial', sans-serif;
             text-align: center;
-            overflow: hidden; /* Prevents scrollbars when button moves */
+            overflow: hidden;
         }
 
         .container {
@@ -42,9 +42,10 @@
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            position: relative; /* Needed for absolute positioning of 'No' button */
-            height: 60px; /* Reserve space */
+            align-items: center; /* Ensures they align vertically */
+            gap: 20px; /* Keeps them apart */
+            height: 60px;
+            width: 100%; /* Ensure full width for spacing */
         }
 
         button {
@@ -72,11 +73,9 @@
         #noBtn {
             background-color: #e0e0e0;
             color: #333;
-            position: absolute; /* Allows us to move it anywhere */
-            left: 100%; /* Start position */
+            /* I removed the 'position: absolute' lines here so it starts naturally next to Yes */
         }
 
-        /* Success Message hidden by default */
         .success-message {
             display: none;
             color: #d32f2f;
@@ -112,10 +111,14 @@
     <script>
         function moveButton() {
             const noBtn = document.getElementById('noBtn');
+            
+            // Calculate random position
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
             
-            noBtn.style.position = 'fixed'; // Change to fixed to move relative to viewport
+            // Apply the new position
+            // This triggers the moment she hovers or taps it
+            noBtn.style.position = 'fixed'; 
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
         }
@@ -123,11 +126,8 @@
         function acceptDate() {
             document.getElementById('question-box').style.display = 'none';
             document.getElementById('success-box').style.display = 'block';
-            
-            // Optional: Add confetti or sound here if you wanted to get fancy!
         }
     </script>
 
 </body>
 </html>
-
