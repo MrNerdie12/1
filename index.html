@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Be My Valentine?</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
         * {
             box-sizing: border-box;
@@ -16,12 +23,12 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            font-family: 'Arial', sans-serif;
+            /* Changed font to Nunito for better readability */
+            font-family: 'Nunito', sans-serif;
             text-align: center;
 
             /* --- BACKGROUND IMAGE --- */
-            /* Replace 'background.jpg' with your file if you have one */
-            background-image: url('background.png');
+            background-image: url('background.png'); 
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -44,12 +51,14 @@
         h1 {
             color: #d32f2f;
             margin-bottom: 20px;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
+            /* Cursive font for headings */
+            font-family: 'Dancing Script', cursive; 
         }
 
         p {
             color: #555;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             margin-bottom: 30px;
             line-height: 1.5;
         }
@@ -73,12 +82,13 @@
             cursor: pointer;
             transition: transform 0.2s;
             white-space: nowrap;
+            font-family: 'Nunito', sans-serif; /* Consistent font */
+            font-weight: bold;
         }
 
         #yesBtn {
             background-color: #ff4d4d;
             color: white;
-            font-weight: bold;
             box-shadow: 0 4px 6px rgba(255, 77, 77, 0.3);
             z-index: 10;
         }
@@ -121,10 +131,9 @@
             opacity: 0;
             transform: translateY(10px);
             transition: all 0.5s ease;
-            cursor: pointer; /* Shows it is clickable */
+            cursor: pointer; 
         }
 
-        /* Add a hover effect so she knows to click it */
         .timeline-item:hover {
             background-color: rgba(255, 230, 230, 0.5);
             border-radius: 10px;
@@ -168,16 +177,17 @@
 
         /* --- MODAL (POPUP) STYLES --- */
         .modal {
-            display: none; /* Hidden by default */
+            display: none; 
             position: fixed;
             z-index: 100;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.6); /* Black background with opacity */
+            background-color: rgba(0,0,0,0.6); 
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(2px); /* Blurs background when modal is open */
         }
 
         .modal-content {
@@ -191,7 +201,6 @@
             animation: popIn 0.3s ease;
         }
 
-        /* Animation for the window popping up */
         @keyframes popIn {
             from {transform: scale(0.5); opacity: 0;}
             to {transform: scale(1); opacity: 1;}
@@ -211,7 +220,6 @@
             color: #000;
         }
 
-        /* Style for the animation image inside the modal */
         #modal-img {
             width: 100%;
             border-radius: 10px;
@@ -248,98 +256,4 @@
                     <div class="click-hint">(Tap to view)</div>
                 </div>
 
-                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif', 'Yummy Food!')" style="transition-delay: 0.4s">
-                    <span class="time">02:00 PM</span>
-                    <div class="activity">Romantic Picnic Lunch</div>
-                    <div class="details">Picnic with our favorite snacks.</div>
-                    <div class="click-hint">(Tap to view)</div>
-                </div>
-
-                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/l2JIdnF6aJcFxDebK/giphy.gif', 'Relaxation Time')" style="transition-delay: 0.6s">
-                    <span class="time">4:00 PM</span>
-                    <div class="activity">Check-in to our BnB</div>
-                    <div class="details">Staycation in Makati!</div>
-                    <div class="click-hint">(Tap to view)</div>
-                </div>
-
-                 <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/3o7rc0qU6m5bcMCGWQ/giphy.gif', 'Movie Marathon')" style="transition-delay: 0.8s">
-                    <span class="time">6:00 PM</span>
-                    <div class="activity">Binge watching</div>
-                    <div class="details">Watching our favorite shows.</div>
-                    <div class="click-hint">(Tap to view)</div>
-                </div>
-
-                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif', 'Cheers!')" style="transition-delay: 1.0s">
-                    <span class="time">9:00 PM</span>
-                    <div class="activity">Dinner and Drinks</div>
-                    <div class="details">Celebratory dinner!</div>
-                    <div class="click-hint">(Tap to view)</div>
-                </div>
-
-                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/xT0xeuOy2Fcl9vDGiA/giphy.gif', 'Sweet Dreams')" style="transition-delay: 1.2s">
-                    <span class="time">11:30 PM</span>
-                    <div class="activity">Dessert & Stargazing</div>
-                    <div class="details">Sweet treats to end the night!</div>
-                    <div class="click-hint">(Tap to view)</div>
-                </div>
-            </div>
-            <h1 style="text-align: center; margin-top: 30px;">All you have to do is look pretty, leave everything to me.</h1>
-        </div>
-    </div>
-
-    <div id="myModal" class="modal" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 id="modal-title" style="color: #d32f2f; margin-top: 0;">Surprise!</h2>
-            <img id="modal-img" src="" alt="Surprise Animation">
-        </div>
-    </div>
-
-    <script>
-        function moveButton() {
-            const noBtn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = `${x}px`;
-            noBtn.style.top = `${y}px`;
-        }
-
-        function acceptDate() {
-            document.getElementById('question-box').style.display = 'none';
-            const successBox = document.getElementById('success-box');
-            successBox.style.display = 'block';
-
-            setTimeout(() => {
-                const items = document.querySelectorAll('.timeline-item');
-                items.forEach(item => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                });
-            }, 100);
-        }
-
-        // --- NEW MODAL FUNCTIONS ---
-
-        function showModal(imageSrc, titleText) {
-            const modal = document.getElementById('myModal');
-            const modalImg = document.getElementById('modal-img');
-            const modalTitle = document.getElementById('modal-title');
-
-            // Set the image and title based on which item was clicked
-            modalImg.src = imageSrc;
-            if(titleText) {
-                modalTitle.innerText = titleText;
-            }
-
-            modal.style.display = "flex"; // Show the window
-        }
-
-        function closeModal() {
-            document.getElementById('myModal').style.display = "none";
-        }
-    </script>
-
-</body>
-</html>
+                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif', 'Yummy
