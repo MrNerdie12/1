@@ -1,129 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>One Last Date Before Forever</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #fff0f5, #ffe6e6);
-      text-align: center;
-      padding: 50px;
-      color: #333;
-    }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.2em;
-    }
-    p {
-      font-size: 1.2em;
-      margin: 1em 0;
-    }
-    button {
-      font-size: 1.2em;
-      padding: 10px 20px;
-      background-color: #ff6699;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #ff3366;
-    }
-	#countdown {
-	  margin-top: 40px;
-	  padding: 20px;
-	  background-color: #fff5f8;
-	  border-radius: 12px;
-	  box-shadow: 0 0 10px rgba(255, 102, 153, 0.2);
-	}
-	#noBtn {
-	  position: absolute;
-	  padding: 10px 20px;
-	  background-color: #ff6699;
-	  border: none;
-	  border-radius: 8px;
-	  cursor: pointer;
-	}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6e6; /* Soft pink background */
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            overflow: hidden; /* Prevents scrollbars when button moves */
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 90%;
+            width: 400px;
+        }
+
+        h1 {
+            color: #d32f2f;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative; /* Needed for absolute positioning of 'No' button */
+            height: 60px; /* Reserve space */
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d4d;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(255, 77, 77, 0.3);
+            z-index: 10;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            background-color: #e60000;
+        }
+
+        #noBtn {
+            background-color: #e0e0e0;
+            color: #333;
+            position: absolute; /* Allows us to move it anywhere */
+            left: 55%; /* Start position */
+        }
+
+        /* Success Message hidden by default */
+        .success-message {
+            display: none;
+            color: #d32f2f;
+        }
+
+        .success-message img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-	<h1>One Last Date Before Forever</h1>
-	<p>Hi love,</p>
-	<p>Before we say “I do” on October 28, I’d love to take you out one last time — just us, just like old times.</p>
-	<p>Would you go on a date with me on <strong>October 22</strong>? at around 7PM onwards in Din Tai Fung BGC💕</p>
-	<br />
-	<p>I know you're tired from school that day, but would you want to go on a date with me?</p>
-	<div style="text-align: center;">
-  	<button onclick="showCountdown()">Yes, of course!</button>
-	</div>
-	<br><br>
-	<div style="text-align: center;">
-	  <button id="noBtn">No 😢</button>
-	</div>
-	<div id="countdown" style="display: none;">
-	  <h2>Counting down to our date…</h2>
-	  <p id="timer" style="font-size: 1.5em; font-weight: bold;"></p>
-	</div>
-<script>
-  const targetDate = new Date("2025-10-22T18:00:00+08:00");
 
-  function showCountdown() {
-    document.getElementById("countdown").style.display = "block";
-    alert("Yay! I can’t wait 💖");
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  }
+    <div class="container">
+        <div id="question-box">
+            <h1>My Dearest Wife,</h1>
+            <p>Will you be my Valentine and go on a date with me this February 14th?</p>
+            
+            <div class="buttons">
+                <button id="yesBtn" onclick="acceptDate()">YES ❤️</button>
+                <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+            </div>
+        </div>
 
-  function updateCountdown() {
-    const now = new Date();
-    const diff = targetDate - now;
+        <div id="success-box" class="success-message">
+            <h1>Yay! I love you! ❤️</h1>
+            <p>I'll pick you up at 7:00 PM!</p>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnZ4bm1qbnZ4bm1qbnZ4bm1qbnZ4bm1qbnZ4bm1qbnZ4bm1qJmN0PWc/26BRv0ThflsKCqMKe/giphy.gif" alt="Happy Cat">
+        </div>
+    </div>
 
-    if (diff <= 0) {
-      document.getElementById("timer").innerHTML = "It's date time! 💖";
-      return;
-    }
+    <script>
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.position = 'fixed'; // Change to fixed to move relative to viewport
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
+        function acceptDate() {
+            document.getElementById('question-box').style.display = 'none';
+            document.getElementById('success-box').style.display = 'block';
+            
+            // Optional: Add confetti or sound here if you wanted to get fancy!
+        }
+    </script>
 
-    document.getElementById("timer").innerHTML =
-      `${days}d ${hours}h ${minutes}m ${seconds}s`;
-  }
-
-  const noBtn = document.getElementById("noBtn");
-
-	noBtn.style.left = "50%";
-	noBtn.style.top = "400px";
-	noBtn.style.transform = "translateX(-50%)";
-	
-	noBtn.addEventListener("mouseenter", () => {
-	  const maxX = window.innerWidth - noBtn.offsetWidth;
-	  const maxY = window.innerHeight - noBtn.offsetHeight;
-	
-	  const newX = Math.floor(Math.random() * maxX);
-	  const newY = Math.floor(Math.random() * maxY);
-	
-	  noBtn.style.left = `${newX}px`;
-	  noBtn.style.top = `${newY}px`;
-	  noBtn.style.transform = "none";
-		noBtn.innerText = "Nice try 😘";
-	});
-</script>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
+</html>
