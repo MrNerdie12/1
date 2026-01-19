@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Question</title>
+    <title>Be My Valentine?</title>
     <style>
-        /* This rule ensures padding doesn't mess up widths */
         * {
             box-sizing: border-box;
         }
@@ -16,11 +15,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* Changed to min-height for scrolling content */
             background-color: #ffe6e6;
             font-family: 'Arial', sans-serif;
             text-align: center;
-            overflow: hidden;
+            /* overflow: hidden;  <-- Removed this so we can scroll the roadmap if needed */
         }
 
         .container {
@@ -28,42 +27,45 @@
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            /* I increased the width slightly to 500px to fit the buttons */
             max-width: 90%;
-            width: 500px; 
+            width: 500px;
+            margin: 20px; /* Adds space on mobile */
+            position: relative;
+            transition: height 0.3s ease;
         }
 
         h1 {
             color: #d32f2f;
             margin-bottom: 20px;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
         }
 
         p {
             color: #555;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 30px;
+            line-height: 1.5;
         }
 
+        /* --- BUTTON STYLES --- */
         .buttons {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px; 
+            gap: 20px;
             height: 60px;
-            width: 100%; 
-            position: relative; /* Safety for the moving button */
+            width: 100%;
+            position: relative;
         }
 
         button {
-            /* I reduced the padding slightly so they fit better */
             padding: 15px 25px;
             font-size: 1.2rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: transform 0.2s;
-            white-space: nowrap; /* Keeps text on one line */
+            white-space: nowrap;
         }
 
         #yesBtn {
@@ -71,7 +73,7 @@
             color: white;
             font-weight: bold;
             box-shadow: 0 4px 6px rgba(255, 77, 77, 0.3);
-            z-index: 10; /* Ensures Yes is always on top */
+            z-index: 10;
         }
 
         #yesBtn:hover {
@@ -82,19 +84,67 @@
         #noBtn {
             background-color: #e0e0e0;
             color: #333;
-            /* No special position here, so it sits next to Yes naturally */
         }
 
+        /* --- SUCCESS & ROADMAP STYLES --- */
         .success-message {
-            display: none;
-            color: #d32f2f;
+            display: none; /* Hidden by default */
+            text-align: left; /* Better for reading the timeline */
         }
 
-        .success-message img {
-            max-width: 100%;
-            border-radius: 10px;
-            margin-top: 20px;
+        .chibi-img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 15px;
+            display: block;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
+
+        .timeline {
+            margin-top: 20px;
+            padding-left: 20px;
+            border-left: 3px solid #ffccd5;
+        }
+
+        .timeline-item {
+            margin-bottom: 25px;
+            padding-left: 20px;
+            position: relative;
+            opacity: 0; /* Hidden for animation */
+            transform: translateY(10px);
+            transition: all 0.5s ease;
+        }
+
+        .timeline-item::before {
+            content: '❤️';
+            position: absolute;
+            left: -14px; /* Centers the heart on the line */
+            background: white;
+            top: 0;
+            font-size: 1.2rem;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #ff4d4d;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .activity {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        .details {
+            font-size: 0.95rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
     </style>
 </head>
 <body>
@@ -111,29 +161,67 @@
         </div>
 
         <div id="success-box" class="success-message">
-            <h1>Yay! I love you! ❤️</h1>
-            <p>I'll pick you up at 7:00 PM!</p>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnZ4bm1qbnZ4bm1qbnZ4bm1qbnZ4bm1qbnZ4bm1qbnZ4bm1qJmN0PWc/26BRv0ThflsKCqMKe/giphy.gif" alt="Happy Cat">
+            <img src="date-cartoon.png" alt="Us as Chibi Anime Characters" class="chibi-img">
+            
+            <h1 style="text-align: center;">It's a Date! ❤️</h1>
+            <p style="text-align: center;">I'm so excited! Here is the plan:</p>
+
+            <div class="timeline">
+                <div class="timeline-item" style="transition-delay: 0.2s">
+                    <span class="time">7:00 PM</span>
+                    <div class="activity">Pick Up</div>
+                    <div class="details">Wear that dress I love! 👗</div>
+                </div>
+
+                <div class="timeline-item" style="transition-delay: 0.4s">
+                    <span class="time">7:30 PM</span>
+                    <div class="activity">Romantic Dinner</div>
+                    <div class="details">Reservations at [Restaurant Name] 🍝</div>
+                </div>
+
+                <div class="timeline-item" style="transition-delay: 0.6s">
+                    <span class="time">9:00 PM</span>
+                    <div class="activity">Surprise Activity</div>
+                    <div class="details">We are going to [Place/Activity]! ✨</div>
+                </div>
+
+                 <div class="timeline-item" style="transition-delay: 0.8s">
+                    <span class="time">10:30 PM</span>
+                    <div class="activity">Dessert & Stargazing</div>
+                    <div class="details">Sweet treats to end the night 🍦</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         function moveButton() {
             const noBtn = document.getElementById('noBtn');
-            
-            // Calculate random position within the window
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
             
-            // Once she tries to click it, it becomes "fixed" and can go anywhere on screen
-            noBtn.style.position = 'fixed'; 
+            noBtn.style.position = 'fixed';
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
         }
 
         function acceptDate() {
+            // Hide Question
             document.getElementById('question-box').style.display = 'none';
-            document.getElementById('success-box').style.display = 'block';
+            
+            // Show Success
+            const successBox = document.getElementById('success-box');
+            successBox.style.display = 'block';
+
+            // Trigger animations for timeline items
+            // We use a small timeout to let the display:block render first
+            setTimeout(() => {
+                const items = document.querySelectorAll('.timeline-item');
+                items.forEach(item => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                });
+            }, 100);
         }
     </script>
 
