@@ -19,19 +19,18 @@
             font-family: 'Arial', sans-serif;
             text-align: center;
 
-            /* --- BACKGROUND IMAGE STYLES --- */
-            /* Replace 'background.jpg' with the filename you uploaded to GitHub */
+            /* --- BACKGROUND IMAGE --- */
+            /* Replace 'background.jpg' with your file if you have one */
             background-image: url('background.png');
-            background-size: cover; /* Ensures it fills the whole screen */
-            background-position: center; /* Centers the focus */
+            background-size: cover;
+            background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed; /* Keeps background still while scrolling on mobile */
-            background-color: #ffe6e6; /* Fallback color just in case */
+            background-attachment: fixed;
+            background-color: #ffe6e6;
         }
 
-        /* Added a slight transparency to the white box so the background shows through a bit */
         .container {
-            background: rgba(255, 255, 255, 0.95); 
+            background: rgba(255, 255, 255, 0.95);
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
@@ -39,8 +38,7 @@
             width: 500px;
             margin: 20px;
             position: relative;
-            transition: height 0.3s ease;
-            backdrop-filter: blur(5px); /* Optional: Adds a nice blur effect behind the box */
+            backdrop-filter: blur(5px);
         }
 
         h1 {
@@ -56,7 +54,7 @@
             line-height: 1.5;
         }
 
-        /* --- BUTTON STYLES --- */
+        /* --- BUTTONS --- */
         .buttons {
             display: flex;
             justify-content: center;
@@ -95,7 +93,7 @@
             color: #333;
         }
 
-        /* --- SUCCESS & ROADMAP STYLES --- */
+        /* --- SUCCESS & ROADMAP --- */
         .success-message {
             display: none;
             text-align: left;
@@ -123,6 +121,13 @@
             opacity: 0;
             transform: translateY(10px);
             transition: all 0.5s ease;
+            cursor: pointer; /* Shows it is clickable */
+        }
+
+        /* Add a hover effect so she knows to click it */
+        .timeline-item:hover {
+            background-color: rgba(255, 230, 230, 0.5);
+            border-radius: 10px;
         }
 
         .timeline-item::before {
@@ -154,6 +159,65 @@
             margin-top: 5px;
         }
 
+        .click-hint {
+            font-size: 0.8rem;
+            color: #ff4d4d;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        /* --- MODAL (POPUP) STYLES --- */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6); /* Black background with opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+            position: relative;
+            animation: popIn 0.3s ease;
+        }
+
+        /* Animation for the window popping up */
+        @keyframes popIn {
+            from {transform: scale(0.5); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        /* Style for the animation image inside the modal */
+        #modal-img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -173,46 +237,61 @@
             <img src="date-cartoon.png" alt="Us as Chibi Anime Characters" class="chibi-img">
             
             <h1 style="text-align: center;">It's a Date! ❤️</h1>
-            <p style="text-align: center;">I'm so excited! Here is the plan:</p>
+            <p style="text-align: center;">I'm so excited! Tap the plans to see a surprise:</p>
 
             <div class="timeline">
-                <div class="timeline-item" style="transition-delay: 0.2s">
+                
+                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5Z3Z5Z3Z5Z3Z5Z3Z5Z3Z5Z3Z5/LpDmM2wSt6Hm4/giphy.gif', 'Let\'s go shopping!')" style="transition-delay: 0.2s">
                     <span class="time">10:00 AM</span>
                     <div class="activity">Salcedo Weekend Market</div>
-                    <div class="details">Stroll around the weekend market! Window shopping and gonna get you a flower!</div>
+                    <div class="details">Stroll around and get you a flower!</div>
+                    <div class="click-hint">(Tap to view)</div>
                 </div>
 
-                <div class="timeline-item" style="transition-delay: 0.4s">
+                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif', 'Yummy Food!')" style="transition-delay: 0.4s">
                     <span class="time">02:00 PM</span>
                     <div class="activity">Romantic Picnic Lunch</div>
-                    <div class="details">Picnic lunch at Salcedo with the food we bought with a flower on your hand.</div>
+                    <div class="details">Picnic with our favorite snacks.</div>
+                    <div class="click-hint">(Tap to view)</div>
                 </div>
 
-                <div class="timeline-item" style="transition-delay: 0.6s">
+                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/l2JIdnF6aJcFxDebK/giphy.gif', 'Relaxation Time')" style="transition-delay: 0.6s">
                     <span class="time">4:00 PM</span>
                     <div class="activity">Check-in to our BnB</div>
-                    <div class="details">We are going to stay 1 night in Makati!</div>
+                    <div class="details">Staycation in Makati!</div>
+                    <div class="click-hint">(Tap to view)</div>
                 </div>
 
-                 <div class="timeline-item" style="transition-delay: 0.8s">
+                 <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/3o7rc0qU6m5bcMCGWQ/giphy.gif', 'Movie Marathon')" style="transition-delay: 0.8s">
                     <span class="time">6:00 PM</span>
                     <div class="activity">Binge watching</div>
-                    <div class="details">We gonna binge watch while we wait for dinner</div>
+                    <div class="details">Watching our favorite shows.</div>
+                    <div class="click-hint">(Tap to view)</div>
                 </div>
 
-                <div class="timeline-item" style="transition-delay: 1.0s">
+                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif', 'Cheers!')" style="transition-delay: 1.0s">
                     <span class="time">9:00 PM</span>
                     <div class="activity">Dinner and Drinks</div>
-                    <div class="details">Let's have dinner and a few drinks to celebrate valentines</div>
+                    <div class="details">Celebratory dinner!</div>
+                    <div class="click-hint">(Tap to view)</div>
                 </div>
 
-                <div class="timeline-item" style="transition-delay: 1.2s">
+                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/xT0xeuOy2Fcl9vDGiA/giphy.gif', 'Sweet Dreams')" style="transition-delay: 1.2s">
                     <span class="time">11:30 PM</span>
                     <div class="activity">Dessert & Stargazing</div>
                     <div class="details">Sweet treats to end the night!</div>
+                    <div class="click-hint">(Tap to view)</div>
                 </div>
             </div>
             <h1 style="text-align: center; margin-top: 30px;">All you have to do is look pretty, leave everything to me.</h1>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title" style="color: #d32f2f; margin-top: 0;">Surprise!</h2>
+            <img id="modal-img" src="" alt="Surprise Animation">
         </div>
     </div>
 
@@ -240,8 +319,27 @@
                 });
             }, 100);
         }
+
+        // --- NEW MODAL FUNCTIONS ---
+
+        function showModal(imageSrc, titleText) {
+            const modal = document.getElementById('myModal');
+            const modalImg = document.getElementById('modal-img');
+            const modalTitle = document.getElementById('modal-title');
+
+            // Set the image and title based on which item was clicked
+            modalImg.src = imageSrc;
+            if(titleText) {
+                modalTitle.innerText = titleText;
+            }
+
+            modal.style.display = "flex"; // Show the window
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
     </script>
 
 </body>
 </html>
-
