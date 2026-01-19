@@ -256,4 +256,110 @@
                     <div class="click-hint">(Tap to view)</div>
                 </div>
 
-                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif', 'Yummy
+                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif', 'Yummy Food!')" style="transition-delay: 0.4s">
+                    <span class="time">02:00 PM</span>
+                    <div class="activity">Romantic Picnic Lunch</div>
+                    <div class="details">Picnic with our favorite snacks.</div>
+                    <div class="click-hint">(Tap to view)</div>
+                </div>
+
+                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/l2JIdnF6aJcFxDebK/giphy.gif', 'Relaxation Time')" style="transition-delay: 0.6s">
+                    <span class="time">4:00 PM</span>
+                    <div class="activity">Check-in to our BnB</div>
+                    <div class="details">Staycation in Makati!</div>
+                    <div class="click-hint">(Tap to view)</div>
+                </div>
+
+                 <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/3o7rc0qU6m5bcMCGWQ/giphy.gif', 'Movie Marathon')" style="transition-delay: 0.8s">
+                    <span class="time">6:00 PM</span>
+                    <div class="activity">Binge watching</div>
+                    <div class="details">Watching our favorite shows.</div>
+                    <div class="click-hint">(Tap to view)</div>
+                </div>
+
+                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif', 'Cheers!')" style="transition-delay: 1.0s">
+                    <span class="time">9:00 PM</span>
+                    <div class="activity">Dinner and Drinks</div>
+                    <div class="details">Celebratory dinner!</div>
+                    <div class="click-hint">(Tap to view)</div>
+                </div>
+
+                <div class="timeline-item" onclick="showModal('https://media.giphy.com/media/xT0xeuOy2Fcl9vDGiA/giphy.gif', 'Sweet Dreams')" style="transition-delay: 1.2s">
+                    <span class="time">11:30 PM</span>
+                    <div class="activity">Dessert & Stargazing</div>
+                    <div class="details">Sweet treats to end the night!</div>
+                    <div class="click-hint">(Tap to view)</div>
+                </div>
+            </div>
+            <h1 style="text-align: center; margin-top: 30px;">All you have to do is look pretty, leave everything to me.</h1>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title" style="color: #d32f2f; margin-top: 0; font-family: 'Dancing Script', cursive;">Surprise!</h2>
+            <img id="modal-img" src="" alt="Surprise Animation">
+        </div>
+    </div>
+
+    <script>
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const buttonWidth = noBtn.offsetWidth;
+            const buttonHeight = noBtn.offsetHeight;
+            
+            // Calculate max positions but subtract button size to keep it in view
+            // I also added a 20px margin so it doesn't touch the exact edge
+            const maxX = window.innerWidth - buttonWidth - 20;
+            const maxY = window.innerHeight - buttonHeight - 20;
+
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        function acceptDate() {
+            document.getElementById('question-box').style.display = 'none';
+            const successBox = document.getElementById('success-box');
+            successBox.style.display = 'block';
+            
+            // LAUNCH CONFETTI!
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            setTimeout(() => {
+                const items = document.querySelectorAll('.timeline-item');
+                items.forEach(item => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                });
+            }, 100);
+        }
+
+        function showModal(imageSrc, titleText) {
+            const modal = document.getElementById('myModal');
+            const modalImg = document.getElementById('modal-img');
+            const modalTitle = document.getElementById('modal-title');
+
+            modalImg.src = imageSrc;
+            if(titleText) {
+                modalTitle.innerText = titleText;
+            }
+
+            modal.style.display = "flex"; 
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
