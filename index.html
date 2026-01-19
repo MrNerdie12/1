@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Special Question</title>
     <style>
+        /* This rule ensures padding doesn't mess up widths */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -23,8 +28,9 @@
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            /* I increased the width slightly to 500px to fit the buttons */
             max-width: 90%;
-            width: 400px;
+            width: 500px; 
         }
 
         h1 {
@@ -42,19 +48,22 @@
         .buttons {
             display: flex;
             justify-content: center;
-            align-items: center; /* Ensures they align vertically */
-            gap: 20px; /* Keeps them apart */
+            align-items: center;
+            gap: 20px; 
             height: 60px;
-            width: 100%; /* Ensure full width for spacing */
+            width: 100%; 
+            position: relative; /* Safety for the moving button */
         }
 
         button {
-            padding: 15px 30px;
+            /* I reduced the padding slightly so they fit better */
+            padding: 15px 25px;
             font-size: 1.2rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: transform 0.2s;
+            white-space: nowrap; /* Keeps text on one line */
         }
 
         #yesBtn {
@@ -62,7 +71,7 @@
             color: white;
             font-weight: bold;
             box-shadow: 0 4px 6px rgba(255, 77, 77, 0.3);
-            z-index: 10;
+            z-index: 10; /* Ensures Yes is always on top */
         }
 
         #yesBtn:hover {
@@ -73,7 +82,7 @@
         #noBtn {
             background-color: #e0e0e0;
             color: #333;
-            /* I removed the 'position: absolute' lines here so it starts naturally next to Yes */
+            /* No special position here, so it sits next to Yes naturally */
         }
 
         .success-message {
@@ -112,12 +121,11 @@
         function moveButton() {
             const noBtn = document.getElementById('noBtn');
             
-            // Calculate random position
+            // Calculate random position within the window
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
             
-            // Apply the new position
-            // This triggers the moment she hovers or taps it
+            // Once she tries to click it, it becomes "fixed" and can go anywhere on screen
             noBtn.style.position = 'fixed'; 
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
